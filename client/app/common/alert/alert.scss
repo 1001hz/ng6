@@ -1,0 +1,8 @@
+@import '../common';
+.alert {
+  background-color: $alert-error;
+
+  &.open {
+    display: block;
+  }
+}

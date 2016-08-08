@@ -1,0 +1,8 @@
+<div class="alert" data-ng-class="{'open' : $ctrl.alerts.length > 0}">
+  <ul>
+    <li data-ng-repeat="alert in $ctrl.alerts">
+      {{alert.message}}
+      <span data-ng-click="$ctrl.close(alert.id)">[close]</span>
+    </li>
+  </ul>
+</div>

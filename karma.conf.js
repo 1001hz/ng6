@@ -33,6 +33,8 @@ module.exports = function (config) {
           { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: 'babel' },
           { test: /\.html/, loader: 'raw' },
           { test: /\.styl$/, loader: 'style!css!stylus' },
+          { test: /\.scss$/, loader: 'style!css!sass?includePaths[]=' + encodeURIComponent(require('node-bourbon').includePaths) +
+          '&includePaths[]=' + encodeURIComponent(require('node-neat').includePaths[1]) },
           { test: /\.css$/, loader: 'style!css' }
         ]
       }

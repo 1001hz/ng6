@@ -1,6 +1,8 @@
 var path    = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+//var bourbon = require('node-bourbon').includePaths;
+var neat = require('node-neat').includePaths;
 
 module.exports = {
   devtool: 'sourcemap',
@@ -10,6 +12,8 @@ module.exports = {
        { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel' },
        { test: /\.html$/, loader: 'raw' },
        { test: /\.styl$/, loader: 'style!css!stylus' },
+       { test: /\.scss$/, loader: 'style!css!sass?includePaths[]=' + encodeURIComponent(require('node-bourbon').includePaths) +
+       '&includePaths[]=' + encodeURIComponent(require('node-neat').includePaths[1]) },
        { test: /\.css$/, loader: 'style!css' }
     ]
   },

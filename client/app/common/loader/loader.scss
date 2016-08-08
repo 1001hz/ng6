@@ -1,0 +1,8 @@
+@import '../common';
+.loader {
+  display: none;
+
+  &.loading {
+    display: block;
+  }
+}

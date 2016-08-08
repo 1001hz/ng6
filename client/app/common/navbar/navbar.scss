@@ -1,0 +1,9 @@
+@import '../common';
+
+.navbar{
+
+  background-color: $light-gray;
+  &__item {
+    display: inline-block;
+  }
+}
