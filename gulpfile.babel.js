@@ -17,6 +17,10 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import colorsSupported      from 'supports-color';
 import historyApiFallback   from 'connect-history-api-fallback';
 
+var styleguide = require('sc5-styleguide');
+var sass = require('gulp-sass');
+var inject = require('gulp-inject');
+
 let root = 'client';
 
 // helper method for resolving paths
@@ -42,7 +46,21 @@ let paths = {
   ],
   output: root,
   blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
-  dest: path.join(__dirname, 'dist')
+  dest: path.join(__dirname, 'dist'),
+  sass: ['./client/app/app.scss'],
+  sg: {
+    directory: 'styleguide/',
+    appDirectory: 'styleguide/app/',
+    sassGenerated: ['styleguide/style.scss'],
+    sass: [
+      './client/app/*.scss',
+      './client/app/**/*.scss',
+    ],
+    sassComponents: [
+      './client/app/*.scss',
+      './client/app/**/*.scss'
+    ]
+  }
 };
 
 // use webpack.config.js to build modules
@@ -124,3 +142,55 @@ gulp.task('clean', (cb) => {
 });
 
 gulp.task('default', ['watch']);
+
+/**
+ * Styleguide specific
+ */
+
+gulp.task('sass-inject', function() {
+  var files = gulp.src(paths.sg.sassComponents, {read: false});
+
+  return gulp.src(paths.sg.sassGenerated)
+      .pipe(inject(files, {
+        starttag: '// injector',
+        endtag: '// endinjector',
+        transform: function(filepath) {
+          filepath = filepath.split('/');
+          var path = '@import \'..';
+          filepath.map(function(part){
+            path += part+'/';
+          });
+          path = path.substring(0, path.length - 1);
+          return path + '\';';
+        }
+      }))
+      .pipe(gulp.dest(paths.sg.directory));
+});
+
+gulp.task('styleguide:generate', function() {
+  return gulp.src(paths.sg.sass)
+      .pipe(styleguide.generate({
+        title: 'My Styleguide',
+        server: true,
+        rootPath: paths.sg.appDirectory,
+        overviewPath: 'README.md'
+      }))
+      .pipe(gulp.dest(paths.sg.appDirectory));
+});
+
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src(paths.sg.sassGenerated)
+      .pipe(sass({
+        errLogToConsole: true
+      }))
+      .pipe(styleguide.applyStyles())
+      .pipe(gulp.dest(paths.sg.appDirectory));
+});
+
+gulp.task('watch', ['styleguide'], function() {
+  // Start watching changes and update styleguide whenever changes are detected
+  // Styleguide automatically detects existing server instance
+  gulp.watch(['*.scss'], ['styleguide']);
+});
+
+gulp.task('styleguide', ['sass-inject', 'styleguide:generate', 'styleguide:applystyles']);

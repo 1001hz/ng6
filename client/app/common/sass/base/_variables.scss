@@ -1,3 +1,11 @@
+// General
+//
+// This section depicts the general styles.  Colours, font colours, background colours, borders and shadows.
+// The project uses BEM for styling to attempt to keep things as tidy as possible.
+//
+// Styleguide 1.0
+
+// styleguide:ignore:start
 // Breakpoints
 $medium-screen: 600px;
 $large-screen: 900px;
@@ -19,6 +27,25 @@ $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
+// styleguide:ignore:end
+
+// Colours
+//
+// This section depicts base colours
+//
+// $black - Black
+// $white - White
+// $blue - Blue
+// $dark-gray - Dark Gray
+// $medium-gray - Medium Gray
+// $light-gray - Light Gray
+// $alert-error - Alert Error
+// $alert-success - Alert Success
+//
+// markup:
+// <div style="background: {$modifiers};" class="sg-helper__box">{$modifiers}</div>
+//
+// Styleguide 1.1
 // Colors
 $blue: #1565c0;
 $dark-gray: #333;

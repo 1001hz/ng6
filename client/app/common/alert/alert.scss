@@ -1,3 +1,17 @@
+// Alert
+//
+// An alert dialog box
+//
+// markup:
+// <div class="alert open">
+// <ul>
+// <li> alert message
+// <span>[close]</span>
+// </li>
+// </ul>
+// </div>
+//
+// Styleguide 3.0
 @import '../common';
 .alert {
   background-color: $alert-error;
