@@ -93,6 +93,8 @@ Here's a list of available tasks:
 	* runs `serve`.
 * `component`
   * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
+* `styleguide`
+  * builds a styleguide app from sass files and serves it at localhost:3000
   
 ### Testing
 To run the tests, run `npm test` or `karma start`.

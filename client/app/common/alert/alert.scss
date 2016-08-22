@@ -4,17 +4,45 @@
 //
 // markup:
 // <div class="alert open">
-// <ul>
-// <li> alert message
-// <span>[close]</span>
-// </li>
-// </ul>
+//   <ul>
+//     <li class="alert__item"> A thing</li>
+//     <li class="alert__item alert__item--success">Good things</li>
+//     <li class="alert__item alert__item--warning">Maybe things</li>
+//     <li class="alert__item alert__item--error">Bad things</li>
+//   </ul>
 // </div>
 //
 // Styleguide 3.0
 @import '../common';
 .alert {
-  background-color: $alert-error;
+
+  &__item {
+    border: solid 1px $border-gray;
+    border-radius: 3px;
+    color: $white;
+    padding: $base-padding-small $base-padding-large;
+    position: relative;
+
+    &:after {
+      content: 'x';
+      position: absolute;
+      right: $base-padding-small;
+      top: $base-padding-small;
+      cursor: pointer;
+    }
+
+    &--success {
+      background-color: $alert-success;
+    }
+
+    &--warning {
+      background-color: $alert-warning;
+    }
+
+    &--error {
+      background-color: $alert-error;
+    }
+  }
 
   &.open {
     display: block;

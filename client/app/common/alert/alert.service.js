@@ -1,9 +1,8 @@
 class AlertService {
 
-  constructor($rootScope, $q) {
+  constructor($rootScope) {
     var self = this;
     self.$rootScope = $rootScope;
-    self.$q = $q;
     self.counter = 0;
   }
 
@@ -16,10 +15,12 @@ class AlertService {
       message: message
     };
 
-    var defered = self.$q.defer();
-    self.$rootScope.$broadcast('alert', alert);
-    defered.reject();
-    return defered.promise;
+    return new Promise(
+        function(resolve, reject){
+          self.$rootScope.$broadcast('alert', alert);
+          reject('error');
+        }
+    );
   }
 
   success(message) {
@@ -31,12 +32,14 @@ class AlertService {
       message: message
     };
 
-    var defered = self.$q.defer();
-    self.$rootScope.$broadcast('alert', alert);
-    defered.resolve();
-    return defered.promise;
+    return new Promise(
+        function(resolve, reject){
+          self.$rootScope.$broadcast('alert', alert);
+          resolve('success');
+        }
+    );
   }
 
 }
-AlertService.$inject = ['$rootScope', '$q'];
+AlertService.$inject = ['$rootScope'];
 export default AlertService;

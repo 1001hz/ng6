@@ -38,6 +38,7 @@ $base-z-index: 0;
 // $blue - Blue
 // $dark-gray - Dark Gray
 // $medium-gray - Medium Gray
+// $border-gray - Border Gray
 // $light-gray - Light Gray
 // $alert-error - Alert Error
 // $alert-success - Alert Success
@@ -47,13 +48,17 @@ $base-z-index: 0;
 //
 // Styleguide 1.1
 // Colors
+$black: #111111;
+$white: #ffffff;
 $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$border-gray: #fefefe;
 
 $alert-error: red;
 $alert-success: green;
+$alert-warning: orange;
 
 // Font Colors
 $base-font-color: $dark-gray;
@@ -74,3 +79,7 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 // Animations
 $base-duration: 150ms;
 $base-timing: ease;
+
+// Spacings
+$base-padding-small: 15px;
+$base-padding-large: 30px;
