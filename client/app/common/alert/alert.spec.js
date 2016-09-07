@@ -47,6 +47,14 @@ describe('Alert', () => {
             return expect(service.error()).to.be.rejectedWith('error');
         });
 
+        it('calls broadcast when alerting', () => {
+            spyOn($rootScope, '$broadcast');
+            return service.success()
+                .then(function(){
+                    expect($rootScope.$broadcast).toHaveBeenCalledWith('alert');
+                });
+        });
+
     });
 
     describe('Controller', () => {
